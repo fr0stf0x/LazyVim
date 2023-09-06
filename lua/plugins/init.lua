@@ -1,4 +1,43 @@
+local function on_file_remove(args)
+  local ts_clients = vim.lsp.get_active_clients({ name = "tsserver" })
+  for _, ts_client in ipairs(ts_clients) do
+    ts_client.request("workspace/executeCommand", {
+      command = "_typescript.applyRenameFile",
+      arguments = {
+        {
+          sourceUri = vim.uri_from_fname(args.source),
+          targetUri = vim.uri_from_fname(args.destination),
+        },
+      },
+    })
+  end
+end
+
 return {
+  {
+    "folke/persistence.nvim",
+    enabled = false,
+  },
+  {
+    "folke/edgy.nvim",
+    keys = {
+      {
+        "<leader>uE",
+        false,
+      },
+      {
+        "<leader>ue",
+        false,
+      },
+      {
+        "<C-n>",
+        function()
+          require("edgy").toggle()
+        end,
+        desc = "Edgy Toggle",
+      },
+    },
+  },
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
@@ -13,6 +52,13 @@ return {
       config = function()
         require("telescope").load_extension("fzf")
       end,
+    },
+    keys = {
+      { "<leader>gb", "<Cmd>Telescope git_branches<CR>", desc = "Branches" },
+      { "<leader>gt", "<Cmd>Telescope git_status<CR>", desc = "Status" },
+      { "<leader>f<CR>", "<Cmd>Telescope resume<CR>", desc = "Resume" },
+      { "<leader>fw", "<Cmd>Telescope live_grep<CR>", desc = "Live grep" },
+      { "<leader>fs", "<Cmd>Telescope grep_string<CR>", desc = "Find current word" },
     },
     opts = {
       defaults = {
@@ -87,10 +133,23 @@ return {
 
   {
     "numToStr/Comment.nvim",
+    event = "LspAttach",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     config = function()
       require("Comment").setup({
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+        toggler = {
+          ---Line-comment toggle keymap
+          line = "<leader>/",
+          ---Block-comment toggle keymap
+          block = "<C-\\>",
+        },
+        opleader = {
+          ---Line-comment keymap
+          line = "<leader>/",
+          ---Block-comment keymap
+          block = "<C-\\>",
+        },
       })
     end,
   },
@@ -121,12 +180,58 @@ return {
 
   {
     "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      window = {
-        mappings = {
-          ["l"] = "open",
+    opts = function(_, opts)
+      opts.window.mappings = {
+        ["l"] = "open",
+      }
+
+      local events = require("neo-tree.events")
+      opts.event_handlers = {
+        {
+          event = events.FILE_MOVED,
+          handler = on_file_remove,
         },
+        {
+          event = events.FILE_RENAMED,
+          handler = on_file_remove,
+        },
+      }
+    end,
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    dependencies = {
+      {
+        "sindrets/diffview.nvim",
+        cmd = { "DiffviewOpen", "DiffviewClose" },
       },
     },
+  },
+
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "BufWinEnter",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
+  },
+
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "<leader>ts", "<Cmd>TSJSplit<CR>", desc = "TreeSJ Split" },
+      { "<leader>tj", "<Cmd>TSJJoin<CR>", desc = "TreeSJ Join" },
+      { "<leader>m", "<Cmd>TSJToggle<CR>", desc = "TreeSJ Toggle" },
+    },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("treesj").setup({--[[ your config ]]
+        use_default_keymaps = false,
+      })
+    end,
   },
 }
