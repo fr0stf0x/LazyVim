@@ -155,6 +155,20 @@ return {
   },
 
   {
+    "petertriho/nvim-scrollbar",
+    event = "BufReadPre",
+    opts = { marks = { GitChange = { text = "│" } } },
+    config = function(_, otps)
+      require("scrollbar").setup(otps)
+    end,
+  },
+
+  {
+    "echasnovski/mini.indentscope",
+    enabled = false,
+  },
+
+  {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
@@ -221,11 +235,16 @@ return {
   },
 
   {
+    "echasnovski/mini.files",
+    opts = { windows = { preview = false } },
+  },
+
+  {
     "Wansmer/treesj",
     keys = {
-      { "<leader>ts", "<Cmd>TSJSplit<CR>", desc = "TreeSJ Split" },
-      { "<leader>tj", "<Cmd>TSJJoin<CR>", desc = "TreeSJ Join" },
-      { "<leader>m", "<Cmd>TSJToggle<CR>", desc = "TreeSJ Toggle" },
+      { "<leader>js", "<Cmd>TSJSplit<CR>", desc = "TreeSJ Split" },
+      { "<leader>jj", "<Cmd>TSJJoin<CR>", desc = "TreeSJ Join" },
+      { "<leader>jm", "<Cmd>TSJToggle<CR>", desc = "TreeSJ Toggle" },
     },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()

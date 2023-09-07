@@ -5,5 +5,7 @@ return {
     opts.servers.bufls = {
       root_dir = lspconfig.util.root_pattern("buf.work.yaml", "go.mod"),
     }
+
+    return opts
   end,
 }

@@ -57,6 +57,8 @@ map("n", "<A-O>", function()
   ts.removeUnused()
 end, { desc = "TypeScript organize imports" })
 
+map("n", "<C-c>", "<cmd> %y+ <CR>", { desc = "Copy whole file" })
+
 -- Move Lines
 map("n", "<A-S-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
 map("n", "<A-S-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
