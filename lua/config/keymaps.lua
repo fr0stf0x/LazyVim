@@ -22,6 +22,9 @@ vim.api.nvim_del_keymap("i", "<A-j>")
 vim.api.nvim_del_keymap("i", "<A-k>")
 vim.api.nvim_del_keymap("v", "<A-j>")
 vim.api.nvim_del_keymap("v", "<A-k>")
+vim.api.nvim_del_keymap("n", "<leader>xl")
+vim.api.nvim_del_keymap("n", "<leader>xq")
+vim.api.nvim_del_keymap("n", "<leader>bb")
 
 vim.cmd([[
   nnoremap <Leader>L "ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>
@@ -29,6 +32,11 @@ vim.cmd([[
   xnoremap <Leader>L "ayoconsole.log('<C-R>a:', <C-R>a);<Esc>
 ]])
 
+map("n", "<C-h>", "<cmd>lua require'tmux'.move_left()<cr>", { desc = "Go to left window" })
+map("n", "<C-j>", "<cmd>lua require'tmux'.move_bottom()<cr>", { desc = "Go to lower window" })
+map("n", "<C-k>", "<cmd>lua require'tmux'.move_top()<cr>", { desc = "Go to upper window" })
+map("n", "<C-l>", "<cmd>lua require'tmux'.move_right()<cr>", { desc = "Go to right window" })
+map("x", "p", "P")
 map({ "n", "v" }, "c", '"_c')
 map({ "n", "v" }, "C", '"_C')
 map({ "n", "v" }, "x", '"_x')
@@ -41,21 +49,14 @@ map("i", "<C-a>", "<Home>", { desc = "edit: Home" })
 map("i", "<C-e>", "<End>", { desc = "edit: End" })
 map("i", "<C-h>", "<Left>")
 map("i", "<C-l>", "<Right>")
-map("i", "<C-j>", "<Down>", { remap = true })
-map("i", "<C-k>", "<Up>", { remap = true })
+map("i", "<C-j>", "<Down>")
+map("i", "<C-k>", "<Up>")
 
-map("n", "[c", function()
+map("n", "[g", function()
   require("treesitter-context").go_to_context()
 end, { desc = "Jump to context" })
 
 map("n", "<leader>bc", ":%bd|e#<CR>", { desc = "Close other buffers" })
-
-map("n", "<A-O>", function()
-  local ts = require("typescript").actions
-  ts.addMissingImports({ sync = true })
-  ts.organizeImports()
-  ts.removeUnused()
-end, { desc = "TypeScript organize imports" })
 
 map("n", "<C-c>", "<cmd> %y+ <CR>", { desc = "Copy whole file" })
 
