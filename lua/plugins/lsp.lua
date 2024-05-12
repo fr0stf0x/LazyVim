@@ -9,6 +9,10 @@ return {
       if type(opts.ensure_installed) == "table" then
         vim.list_extend(opts.ensure_installed, { "proto", "svelte" })
       end
+      -- opts.matchup = {
+      --   enable = true,
+      --   disable = { "typescript" },
+      -- }
 
       return opts
     end,

@@ -1,12 +1,7 @@
+local Util = require("lazyvim.util")
+
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-    config = function()
-      require("telescope").load_extension("fzf")
-    end,
-  },
   keys = {
     { "<leader>/", false },
     { "<leader>gb", "<Cmd>Telescope git_branches<CR>", desc = "Branches" },

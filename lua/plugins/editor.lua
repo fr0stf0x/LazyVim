@@ -17,6 +17,7 @@ return {
   {
     "aserowy/tmux.nvim",
     event = "BufWinEnter",
+    vscode = false,
     config = function()
       return require("tmux").setup()
     end,
@@ -33,7 +34,14 @@ return {
     "echasnovski/mini.files",
     opts = { windows = { preview = false } },
   },
-
+  {
+    "echasnovski/mini.comment",
+    enabled = false,
+  },
+  {
+    "folke/neodev.nvim",
+    enabled = false,
+  },
   {
     "Wansmer/treesj",
     keys = {
@@ -60,12 +68,10 @@ return {
   },
   {
     "lewis6991/gitsigns.nvim",
-    dependencies = {
-      {
-        "sindrets/diffview.nvim",
-        cmd = { "DiffviewOpen", "DiffviewClose" },
-      },
-    },
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose" },
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -95,16 +101,10 @@ return {
   {
     "andymass/vim-matchup",
     event = "BufReadPost",
+    enabled = false,
     config = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
     end,
-  },
-
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    config = true,
   },
 
   {
@@ -133,6 +133,7 @@ return {
   {
     "petertriho/nvim-scrollbar",
     event = "BufReadPre",
+    enabled = false,
     opts = { marks = { GitChange = { text = "│" } } },
     config = function(_, otps)
       require("scrollbar").setup(otps)
@@ -174,6 +175,41 @@ return {
       require("better_escape").setup()
     end,
   },
+  {
+    "echasnovski/mini.move",
+    event = "VeryLazy",
+    opts = {
+      mappings = {
+        -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+        left = "<M-S-h>",
+        right = "<M-S-l>",
+        down = "<M-S-j>",
+        up = "<M-S-k>",
+
+        -- Move current line in Normal mode
+        line_left = "<M-S-h>",
+        line_right = "<M-S-l>",
+        line_down = "<M-S-j>",
+        line_up = "<M-S-k>",
+      },
+    },
+  },
+
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   opts = function(_, opts)
+  --     opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
+  --     return opts
+  --   end,
+  -- },
+
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   opts = function(_, opts)
+  --     opts.options.theme = "catppuccin"
+  --     return opts
+  --   end,
+  -- },
 
   -- {
   --   "simeji/winresizer",
