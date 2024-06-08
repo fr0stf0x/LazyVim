@@ -17,7 +17,6 @@ return {
   {
     "aserowy/tmux.nvim",
     event = "BufWinEnter",
-    vscode = false,
     config = function()
       return require("tmux").setup()
     end,
@@ -33,14 +32,6 @@ return {
   {
     "echasnovski/mini.files",
     opts = { windows = { preview = false } },
-  },
-  {
-    "echasnovski/mini.comment",
-    enabled = false,
-  },
-  {
-    "folke/neodev.nvim",
-    enabled = false,
   },
   {
     "Wansmer/treesj",
@@ -85,17 +76,18 @@ return {
         ["s"] = false,
       }
 
-      local events = require("neo-tree.events")
-      opts.event_handlers = {
-        {
-          event = events.FILE_MOVED,
-          handler = on_file_remove,
-        },
-        {
-          event = events.FILE_RENAMED,
-          handler = on_file_remove,
-        },
-      }
+      -- local events = require("neo-tree.events")
+      -- opts.event_handlers = {
+      --   {
+      --     event = events.FILE_MOVED,
+      --     handler = on_file_remove,
+      --   },
+      --   {
+      --     event = events.FILE_RENAMED,
+      --     handler = on_file_remove,
+      --   },
+      -- }
+      return opts
     end,
   },
   {
@@ -108,27 +100,39 @@ return {
   },
 
   {
-    "numToStr/Comment.nvim",
-    event = "LspAttach",
-    dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
-    config = function()
-      require("Comment").setup({
-        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-        toggler = {
-          ---Line-comment toggle keymap
-          line = "<leader>/",
-          ---Block-comment toggle keymap
-          block = "<C-\\>",
-        },
-        opleader = {
-          ---Line-comment keymap
-          line = "<leader>/",
-          ---Block-comment keymap
-          block = "<C-\\>",
-        },
-      })
-    end,
+    "echasnovski/mini.comment",
+    opts = {
+      mappings = {
+        comment = "<C-\\>",
+        comment_line = "<leader>/",
+        comment_visual = "<leader>/",
+        textobject = "<leader>/",
+      },
+    },
   },
+
+  -- {
+  --   "numToStr/Comment.nvim",
+  --   event = "LspAttach",
+  --   dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+  --   config = function()
+  --     require("Comment").setup({
+  --       pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+  --       toggler = {
+  --         ---Line-comment toggle keymap
+  --         line = "<leader>/",
+  --         ---Block-comment toggle keymap
+  --         block = "<C-\\>",
+  --       },
+  --       opleader = {
+  --         ---Line-comment keymap
+  --         line = "<leader>/",
+  --         ---Block-comment keymap
+  --         block = "<C-\\>",
+  --       },
+  --     })
+  --   end,
+  -- },
 
   {
     "petertriho/nvim-scrollbar",
