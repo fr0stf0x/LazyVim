@@ -32,9 +32,3 @@ vim.g.markdown_fenced_languages = {
   "go",
   "rust",
 }
-
--- neovide
-vim.o.guifont = "MonoLisaStatic Nerd Font:h15"
-vim.g.neovide_input_macos_alt_is_meta = true
-vim.g.neovide_remember_window_size = true
-vim.g.neovide_cursor_animation_length = 0

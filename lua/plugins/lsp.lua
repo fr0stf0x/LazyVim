@@ -27,9 +27,9 @@ return {
 
       opts.servers.svelte = {}
       opts.servers.unocss = {
-        handlers = {
-          ["textDocument/documentHighlight"] = function() end,
-        },
+        -- handlers = {
+        --   ["textDocument/documentHighlight"] = function() end,
+        -- },
       }
 
       return opts
