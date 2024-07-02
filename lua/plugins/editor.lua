@@ -55,11 +55,14 @@ return {
       { "<C-n>", "<cmd>Neotree toggle<cr>", desc = "Toggle Neotree" },
     },
     opts = function(_, opts)
-      opts.window.mappings = {
-        ["l"] = "open",
-        ["S"] = "open_vsplit",
-        ["s"] = false,
-      }
+      opts.window.mappings.S = "open_vsplit"
+      opts.window.mappings.s = false
+
+      -- opts.window.mappings = {
+      --   ["l"] = "open",
+      --   ["S"] = "open_vsplit",
+      --   ["s"] = false,
+      -- }
 
       return opts
     end,
