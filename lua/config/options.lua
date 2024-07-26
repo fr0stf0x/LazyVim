@@ -7,7 +7,7 @@ vim.g.swapfile = false
 local opt = vim.opt
 
 opt.wrap = false
-opt.conceallevel = 0
+opt.conceallevel = 1
 opt.spell = false
 opt.spelllang = ""
 

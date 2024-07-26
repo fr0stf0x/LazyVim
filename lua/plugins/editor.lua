@@ -192,6 +192,29 @@ return {
       { "<leader>nx", "<cmd>Telescope nx actions<CR>", desc = "nx actions" },
     },
   },
+  {
+    "iamyoki/buffer-reopen.nvim",
+    opts = {},
+  },
+  -- {
+  --   "chrisgrieser/nvim-lsp-endhints",
+  --   event = "LspAttach",
+  --   opts = {}, -- required, even if empty
+  -- },
+  -- {
+  --   "chrisgrieser/nvim-rip-substitute",
+  --   cmd = "RipSubstitute",
+  --   keys = {
+  --     {
+  --       "<leader>sR",
+  --       function()
+  --         require("rip-substitute").sub()
+  --       end,
+  --       mode = { "n", "x" },
+  --       desc = " rip substitute",
+  --     },
+  --   },
+  -- },
 
   -- {
   --   "akinsho/bufferline.nvim",
