@@ -32,7 +32,7 @@ return {
     workspaces = {
       {
         name = "personal",
-        path = "~/Desktop/fr0stf0x/fr0stf0x",
+        path = "~/notes/fr0stf0x",
       },
       -- {
       --   name = "work",
