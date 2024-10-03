@@ -62,3 +62,22 @@ end, { desc = "Jump to context" })
 map("n", "<leader>bc", ":%bd|e#<CR>", { desc = "Close other buffers" })
 
 map("n", "<C-c>", "<cmd> %y+ <CR>", { desc = "Copy whole file" })
+
+-- Keyboard users
+map("n", "<C-t>", function()
+  require("menu").open("default")
+end, { desc = "Open Menu" })
+
+map("n", "<leader>th", function()
+  require("nvchad.themes").open()
+end, { desc = "Open Theme picker" })
+
+-- mouse users + nvimtree users!
+map("n", "<RightMouse>", function()
+  vim.cmd.exec('"normal! \\<RightMouse>"')
+
+  local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+  require("menu").open(options, { mouse = true })
+end, {
+  desc = "Open Menu",
+})

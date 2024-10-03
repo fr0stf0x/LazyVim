@@ -206,6 +206,22 @@ return {
     "iamyoki/buffer-reopen.nvim",
     opts = {},
   },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    enabled = false,
+  },
+
+  {
+    "folke/noice.nvim",
+    opts = {
+      lsp = {
+        signature = {
+          enabled = false,
+        },
+      },
+    },
+  },
   -- {
   --   "chrisgrieser/nvim-lsp-endhints",
   --   event = "LspAttach",

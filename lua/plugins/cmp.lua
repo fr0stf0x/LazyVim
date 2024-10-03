@@ -35,5 +35,11 @@ return {
         end
       end, { "i", "s" }),
     })
+
+    if not vim.g.vscode then
+      return vim.tbl_deep_extend("force", opts, require("nvchad.cmp"))
+    end
+
+    return opts
   end,
 }
